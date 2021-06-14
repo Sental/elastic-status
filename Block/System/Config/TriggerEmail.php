@@ -27,7 +27,7 @@ class TriggerEmail extends Field
 
     /**
      * Return element html
-     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      * @param  AbstractElement $element
      * @return string
      */

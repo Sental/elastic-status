@@ -52,7 +52,10 @@ class Email extends Action implements HttpPostActionInterface
         try {
             $boolResult = true;
             $status = $this->request->execute();
-            $this->email->send("The Full Elasticsearch Status is displayed because this status email was manually sent.\n" . $status);
+            $this->email->send(
+                "The Full Elasticsearch Status is displayed because this status email was manually sent.\n" .
+                $status
+            );
         } catch (\Exception $e) {
             $this->_objectManager->get(\Psr\Log\LoggerInterface::class)->critical($e);
         }

@@ -34,7 +34,8 @@ class Email
         $storeName = $this->scopeConfig->getValue(
             'general/store_information/name',
             ScopeConfigInterface::SCOPE_TYPE_DEFAULT,
-            0) ?: 'Magento';
+            0
+        ) ?: 'Magento';
         //Set the From name to be the website
         $nameFrom = "Elastic Status " . $storeName
         . $this->scopeConfig->getValue('web/unsecure/base_url', ScopeConfigInterface::SCOPE_TYPE_DEFAULT, 0);
