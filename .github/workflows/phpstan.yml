@@ -1,0 +1,19 @@
+name: ExtDN M2 PHPStan
+
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  phpstan:
+    name: M2 PHPStan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: extdn/github-actions-m2/magento-phpstan@master
+        with:
+          composer_name: reessolutions/elastic-status

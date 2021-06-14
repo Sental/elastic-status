@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <!-- Access Control Layer -->
+    <acl>
+        <resources>
+            <!-- Admin Access Restriction Options -->
+            <resource id="Magento_Backend::admin">
+                <resource id="ReesSolutions_ElasticStatus::es_config" title="Reviews Notification Settings" translate="title" sortOrder="110" />
+            </resource>
+        </resources>
+    </acl>
+</config>
