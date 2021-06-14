@@ -1,0 +1,61 @@
+<?php
+/** @var \Magento\Framework\Escaper $escaper */
+$suffix = $escaper->escapeHtmlAttr($block->getSuffix());
+?>
+<script>
+    require([
+        'jquery',
+        'prototype'
+    ], function(jQuery){
+
+        var triggerSpan = jQuery('#trigger_span<?= /* @noEscape */ $suffix; ?>');
+
+        jQuery('#trigger_button<?= /* @noEscape */ $suffix; ?>').click(function () {
+            var params = {};
+            new Ajax.Request('<?= /* @noEscape */$block->getAjaxUrl() ?>', {
+                parameters:     params,
+                loaderArea:     false,
+                asynchronous:   true,
+                onCreate: function() {
+                    triggerSpan.find('.triggered').hide();
+                    triggerSpan.find('.processing').show();
+                    jQuery('#trigger_message_span<?= /* @noEscape */ $suffix; ?>').text('');
+                },
+                onSuccess: function(response) {
+                    triggerSpan.find('.processing').hide();
+
+                    var resultText = '';
+                    if (response.status > 200) {
+                        resultText = response.statusText;
+                    } else {
+                        resultText = 'Success';
+                        triggerSpan.find('.triggered').show();
+                    }
+
+                    var json = response.responseJSON;
+                    if (typeof json.time != 'undefined') {
+                        jQuery('#trigger_message_span<?= /* @noEscape */ $suffix; ?>')
+                        .html(resultText + ": " + json.time.replaceAll('&#13;', '<br/>').replaceAll(',', ',<br/>') 
+                        + "<br/> - Request Completed: " + json.success);
+                    }
+                },
+                onFailure: function() {
+                    triggerSpan.find('.processing').hide();
+                    jQuery('#trigger_message_span<?= /* @noEscape */ $suffix; ?>').text("Request Failed.");
+                }
+            });
+        });
+
+    });
+</script>
+
+<?= $block->getButtonHtml() ?>
+<span class="trigger-indicator" id="trigger_span<?= /* @noEscape */ $suffix; ?>">
+    <img class="processing" hidden="hidden" alt="triggering" style="margin:0 5px" 
+    src="<?= /* @noEscape */ $block->getViewFileUrl('images/process_spinner.gif') ?>"/>
+    <img class="triggered" hidden="hidden" alt="triggered" style="margin:-3px 5px" 
+    src="<?= /* @noEscape */ $block->getViewFileUrl('images/rule_component_apply.gif') ?>"/>
+</span>
+<div>
+    <span id="trigger_message_span<?= /* @noEscape */ $suffix; ?>"></span>
+</div>

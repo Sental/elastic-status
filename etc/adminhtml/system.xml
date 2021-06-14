@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <tab id="rs_tab" translate="label" sortOrder="101" class="rs_logo">
+            <label>Rees Solutions</label>
+        </tab>
+        <section id="rs_es_config" translate="label" type="text" sortOrder="450" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>ElasticStatus Configuration</label>
+            <tab>rs_tab</tab>
+            <resource>ReesSolutions_ElasticStatus::es_config</resource>
+            <group id="rs_es_settings_group" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <comment><![CDATA[Please fill in this information if magento is not using the default elasticsearch7 settings.]]></comment>
+                <label>Elastic Status: Settings</label>
+				<field id="host" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Hostname</label>
+                    <config_path>rs_es_config/settings/host</config_path>
+                </field>
+                <field id="port" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Port</label>
+                    <config_path>rs_es_config/settings/port</config_path>
+                </field>
+                <field id="auth" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Is Authentication Required?</label>
+                    <config_path>rs_es_config/settings/auth</config_path>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="username" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Username</label>
+                    <config_path>rs_es_config/settings/username</config_path>
+                    <depends>
+                        <field id="*/*/auth">1</field>
+                    </depends>
+                </field>
+                <field id="password" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Password</label>
+                    <config_path>rs_es_config/settings/password</config_path>
+                    <depends>
+                        <field id="*/*/auth">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="rs_es_notification_group" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Elastic Status: Downtime Notifications</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable the notifications?</label>
+                    <config_path>rs_es_config/email/enable</config_path>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+				<field id="rs_es_notification_toname" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Email To: Name</label>
+                    <config_path>rs_es_config/email/name</config_path>
+                    <comment><![CDATA[The name of the group who recieves the email.]]></comment>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+                <field id="rs_es_notification_toemail" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Email To: Email</label>
+                    <config_path>rs_es_config/email/email</config_path>
+                    <comment><![CDATA[The email addresses to receive the notifications. comma separated]]></comment>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+                <field id="rs_es_notification_sendemail" translate="label" type="text" sortOrder="55" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Sending Email</label>
+                    <config_path>rs_es_config/email/send_email</config_path>
+                    <comment><![CDATA[The email addresses to receive the notifications. comma separated]]></comment>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="rs_es_trigger_group" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Status Check Triggers</label>
+                <field id="rs_es_status__trigger" translate="label comment" type="button" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <frontend_model>ReesSolutions\ElasticStatus\Block\System\Config\TriggerStatus</frontend_model>
+                    <label>Show Elasticsearch Status</label>
+                </field>
+                <field id="rs_es_email__trigger" translate="label comment" type="button" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <frontend_model>ReesSolutions\ElasticStatus\Block\System\Config\TriggerEmail</frontend_model>
+                    <label>Trigger Status Email</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

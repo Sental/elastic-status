@@ -1,0 +1,27 @@
+{
+    "name": "reessolutions/elastic-status",
+    "description": "A module to check and create notifications about the status of elasticsearch",
+    "type": "magento2-module",
+    "version": "0.0.1",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Mark Rees",
+            "email": "mark@rees.solutions",
+            "homepage": "http://www.rees.solutions/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "~7.3.0 || ~7.4.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "ReesSolutioins\\ElasticStatus\\": ""
+        }
+    }
+}
