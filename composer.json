@@ -2,7 +2,7 @@
     "name": "reessolutions/elastic-status",
     "description": "A module to check and create notifications about the status of elasticsearch",
     "type": "magento2-module",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "minimum-stability": "stable",
     "license": "gpl-3.0",
     "authors": [
